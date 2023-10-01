@@ -1,0 +1,13 @@
+﻿@using umbraco.presentation.nodeFactory;
+@using umbraco.MacroEngines;
+@using umbraco.cms.businesslogic.media;
+@{
+  Node copyright_txt = new Node(1071);
+  try{
+ @Html.Raw(copyright_txt.GetProperty("copyright").Value)
+      }
+  catch
+  {
+   
+   }
+}

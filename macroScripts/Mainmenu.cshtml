@@ -1,0 +1,98 @@
+﻿@using umbraco.presentation.nodeFactory
+@using umbraco.MacroEngines
+@using umbraco.cms.businesslogic.media;
+
+  
+  @helper topLinks(int lastId){
+     Node TopLinkRootId = new Node(1075);
+    
+     if(TopLinkRootId.Children.Count>0)
+     {
+       
+     
+       foreach(Node TopLinkId in TopLinkRootId.Children)
+       {
+       int menuId = int.Parse(TopLinkId.GetProperty("linktoDocument").Value.ToString());
+      if(lastId != TopLinkId.Id)
+      {
+       if(Model.Level >= 2 )
+          {
+    
+              if(Model.Name == TopLinkId.Name || Model.AncestorOrSelf(2).Id == menuId)
+                {              
+         
+                    <li><a class="active" href="@umbraco.library.NiceUrl(menuId)">@TopLinkId.Name</a></li>
+                 }
+               else
+                  {  
+                  
+                     <li><a href="@umbraco.library.NiceUrl(menuId)" style="text-decoration:none;">@TopLinkId.Name</a></li>  
+                  }
+           
+          }
+         
+       else
+            {
+              if(Model.Name  == TopLinkId.Name && Model.AncestorOrSelf(2).Id == TopLinkId.Id)
+              {    
+                   <li><a class="active" href="@umbraco.library.NiceUrl(menuId)">@TopLinkId.Name</a></li>
+              }
+             else
+             {
+                   <li><a  href="@umbraco.library.NiceUrl(menuId)" style="text-decoration:none;">@TopLinkId.Name</a></li>
+                     
+              }
+            }  
+      }  else
+        {
+               if(Model.Level >= 2 )
+          {
+               if(Model.Name == TopLinkId.Name || Model.AncestorOrSelf(2).Id == menuId)
+                {              
+                    <li><a class="active" href="@umbraco.library.NiceUrl(menuId)">@TopLinkId.Name</a></li>
+                }
+               else
+                {  
+                    <li><a href="@umbraco.library.NiceUrl(menuId)" style="text-decoration:none;">@TopLinkId.Name</a></li>  
+                }
+          }
+            else
+            {
+ 
+            <li><a  href="@umbraco.library.NiceUrl(menuId)" style="text-decoration:none;">@TopLinkId.Name</a></li>  
+            
+            }  
+            
+         }
+       }
+     }
+  }
+  
+  @{
+  
+      
+       int count = 0;
+       int q = 0;
+       int lastNodeID = 0;
+       int totalCount = 0;
+        Node child = new Node(1075);
+       totalCount = child.Children.Count;
+       
+       foreach(Node c in child.Children)
+       {
+         if(c.NodeTypeAlias == "Navigation")
+         {
+          
+           count++;
+           q++;
+           if (count == totalCount)
+           {
+              lastNodeID = c.Id;
+            }
+        
+         }
+        }
+       
+       @topLinks(lastNodeID)
+  
+  }

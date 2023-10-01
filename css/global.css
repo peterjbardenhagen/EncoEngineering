@@ -1,0 +1,225 @@
+/* 
+  Resets defualt browser settings
+  reset.css
+*/
+/*
+  Page style
+*/
+
+
+#example {
+  width:600px;
+  height:350px;
+  position:relative;
+}
+
+#ribbon {
+  position:absolute;
+  top:-3px;
+  left:-15px;
+  z-index:500;
+}
+
+#frame {
+  position:absolute;
+  z-index:0;
+  width:739px;
+  height:341px;
+  top:-3px;
+  left:-80px;
+}
+
+/*
+  Slideshow
+*/
+
+#slides {
+  
+  top:15px;
+  left:4px;
+  z-index:100;
+}
+
+/*
+  Slides container
+  Important:
+  Set the width of your slides container
+  Set to display none, prevents content flash
+*/
+
+.slides_container {
+  width:570px;
+  overflow:hidden;
+  position:relative;
+  display:none;
+  width:703px;
+  float: right;
+  
+}
+
+/*
+  Each slide
+  Important:
+  Set the width of your slides
+  If height not specified height will be set by the slide content
+  Set to display block
+*/
+
+.slides_container div.slide {
+  width:703px;
+  height:473px;
+  display:block;
+}
+
+
+/*
+  Next/prev buttons
+*/
+
+#slides .prev, #slides .next {
+
+  height: 43px;
+    left: 278px;
+    position: relative;
+    top: 216px;
+    width: 22px;
+    z-index: 101;
+}
+
+
+#slides .next {
+  left:850px;
+}
+
+/*
+  Pagination
+*/
+
+.pagination {
+    margin-top: 415px;
+    position: relative;
+    width: 150px;
+    z-index: 103;
+}
+
+.pagination li {
+  float:left;
+  margin:0 1px;
+  list-style:none;
+}
+
+.pagination li a {
+  display:block;
+  width:12px;
+  height:0;
+  padding-top:12px;
+  background-image:url(/images/pagination.png);
+  background-position:0 0;
+  float:left;
+  overflow:hidden;
+}
+
+.pagination li a:hover{
+  background-image:url(/images/pagination.png);
+}
+.pagination li.current a {
+  background-position:0 -12px;
+}
+
+/*
+  Caption
+*/
+
+.caption {
+  z-index:500;
+  position:absolute;
+  bottom:-35px;
+  left:0;
+  height:30px;
+  padding:5px 20px 0 20px;
+  background:#000;
+  background:rgba(0,0,0,.5);
+  width:540px;
+  font-size:1.3em;
+  line-height:1.33;
+  color:#fff;
+  border-top:1px solid #000;
+  text-shadow:none;
+  display: none;
+}
+.gray:hover {
+  opacity: 50;
+  }
+/*
+  Footer
+*/
+
+
+/*
+  Anchors
+*/
+
+a:hover,a:active {
+    color:#599100;
+    text-decoration:underline;
+}
+
+/* Description*/
+
+.description
+{
+border: 0px solid #FFFFFF;
+    height: 450px;
+    color: #D6D4D5;
+    position: absolute;
+    width: 220px;
+    /*top: 196px;*/
+   
+/*text-align:justify;*/
+}
+
+.description p 
+{
+ font-size: 13px;
+    line-height: 20px !important;
+    text-align: left;
+}
+
+.description-text
+{
+display:none;
+}
+
+.gray
+{
+    background: none repeat scroll 0 0 #251DB5;
+      opacity: 0.5;
+}
+
+
+
+.smallimages
+{
+margin: 5px -5px 0px 5px;
+cursor:pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */

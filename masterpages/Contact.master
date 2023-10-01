@@ -1,0 +1,45 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/MasterTemplate.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentArea" runat="server">
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD4KFxaQvFifpzYsKMJNAlK2n-BLLWahlo&sensor=false"></script>
+<script type="text/javascript">
+function initialize() {
+
+  
+ var myLatlng = new google.maps.LatLng(-37.824276,145.084895);
+var myOptions = {
+  zoom: 14,
+  center: myLatlng,
+  mapTypeId: google.maps.MapTypeId.ROADMAP,
+}
+  
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+      myOptions);
+  
+  var marker = new google.maps.Marker({
+    position: myLatlng,
+    title:"Enco Engineering"
+});
+
+// To add the marker to the map, call setMap();
+marker.setMap(map);
+}
+document.body.onload = function(){
+  initialize();
+}
+</script>
+<div class="project-content">
+  <p>Suite 103, 313 Canterbury Rd<br />Canterbury VIC 3126<br/>Australia<br /> <br /> Phone: +613 9830 0669<br />Email: <a href="mailto:enco@encoengineering.com.au">enco@encoengineering.com.au</a></p>
+<br /> <br /></div>
+<div class="project-content02">
+
+  <h4>Directions to office</h4>
+<div id="map_canvas" style="width:1200px; height:383px; z-index:9999;">
+<div class="mapouter"><div class="gmap_canvas"><iframe width="1200" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=Suite%20103,%20313%20Canterbury%20Rd%20Canterbury%20VIC%203126%20Australia&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><style>.mapouter{position:relative;text-align:right;height:300px;width:1200px;}</style><style>.gmap_canvas {overflow:hidden;background:none!important;height:300px;width:580px;}</style></div></div>  
+</div>  
+  
+</div>
+<div class="project-content03">
+
+</div>
+</asp:content>

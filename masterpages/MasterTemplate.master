@@ -1,0 +1,122 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>  
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <!-- Enable IE Standards mode -->
+   <meta http-equiv="X-UA-Compatible" content="IE=9" /> 
+   <meta http-equiv="X-UA-Compatible" content="IE=7" /> 
+   <meta http-equiv="X-UA-Compatible" content="IE=6" /> 
+   <!-- Enable IE Standards mode -->  
+  
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <h1><title><umbraco:Item field="projecttitle" runat="server" /></title></h1>
+      <meta name="author" content="Author name"/>
+      <meta name="description" content="<umbraco:Item field="projectDiscription" runat="server" />" />
+      <meta name="keywords" content="<umbraco:Item field="projectKeyword" runat="server" />" />
+ 
+      <link rel="stylesheet" href="/css/global.css">
+      <link rel="stylesheet"  href="/css/mainjquery.css" type="text/css">
+      <link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen" />
+      <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
+      
+      <script type="text/javascript" src="/scripts/jquery-1.7.min.js"></script>
+      <script src="/scripts/hover.js"></script>
+     
+      
+     
+   
+  
+</head>
+<body>
+  <div id="wrap">
+    <div id="wrap-inside">
+      <div id="header">
+        <div class="head-left">
+          <a class="logo" href="/"></a>
+        </div>
+        <div class="head-right2">
+          <a class="logo-pmd" href="https://www.pmdesign.com.au/" target="_blank"></a>
+        </div>
+        
+    
+          <div class="menu-holder">
+            <ul class="main-menu">
+              
+<ul class="main-menu">
+<li><a class="active" href="/home/">Home</a></li>
+<li><a href="https://www.pmdesign.com.au" target="_blank" style="text-decoration:none;">PM Design Group</a></li>
+<li><a href="/projects/" style="text-decoration:none;">Projects</a></li>
+<li><a href="/quote/" style="text-decoration:none;">Quote</a></li>  
+<li><a href="/contact/" style="text-decoration:none;">Contact</a></li>  
+
+              <!-- <li><a class="active" href="/">Home</a></li>
+              <li><a href="/">About</a></li>
+              <li><a href="/">Services</a></li>
+              <li><a href="/">Projects</a></li>
+              <li><a href="/">Quote</a></li>
+              <li><a href="/">Contact</a></li> -->
+            </ul>              
+              
+              <!-- <li><a class="active" href="/">Home</a></li>
+              <li><a href="/">About</a></li>
+              <li><a href="/">Services</a></li>
+              <li><a href="/">Projects</a></li>
+              <li><a href="/">Quote</a></li>
+              <li><a href="/">Contact</a></li> -->
+            </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+        <div id="content">
+        <div id="inner">
+          <div id="project-Container">
+            <asp:ContentPlaceHolder Id="ContentArea" runat="server">
+              <!-- Insert default "ContentArea" markup here -->
+            </asp:ContentPlaceHolder>
+          </div>
+        </div>
+      </div>
+<div id="footer"> 
+  <div class="footer-info">
+    <div class="footer-contact-info">
+      <a href="http://www.engineersaustralia.org.au/" target="_blank"><img src="/images/AuLogo.jpg" alt="Engineer Australia"/></a>
+    </div>
+    
+      <ul class="foot-menu">
+     </ul>
+
+    <div class="footer-info-container">
+      <a href="/"><img src="/images/ee.png" alt=""/></a> <a href="https://www.pmdesign.com.au" target="_blank"><img src="/media/2881/pmd-logo2.png" style="padding-left:20px;height:28px;"></a>
+      <p style="color: #fff;">Enco Engineering<br />
+    Suite 103, 313 Canterbury Rd<br />
+    Canterbury Victoria 3126 Australia<br />
+    Telphone 03 9830 0669<br />
+    <a class="info" href="mailto:enco@encoengineering.com.au">enco@encoengineering.com.au</a></p>
+    
+    </div>
+    <!--foot-menu --><br/>
+
+    
+       <div class="copyright-holder">
+      <p><!--<umbraco:Macro Alias="Copyright" runat="server" />--></p>
+    </div>
+  </div>
+</div><!--footer -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34857712-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>
+</asp:Content>

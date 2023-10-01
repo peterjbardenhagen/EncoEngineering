@@ -1,0 +1,9 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/MasterTemplate.master" AutoEventWireup="true" %>
+<script language="c#" runat="server">
+  protected void Page_Load(object sender, EventArgs e) {
+    Response.Redirect("/Home");
+  }
+</script>
+<asp:content ContentPlaceHolderId="ContentArea" runat="server">
+  
+</asp:content>

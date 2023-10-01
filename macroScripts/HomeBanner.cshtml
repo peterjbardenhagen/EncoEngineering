@@ -1,0 +1,281 @@
+﻿@using umbraco.presentation.nodeFactory;
+@using umbraco.MacroEngines;
+@using umbraco.cms.businesslogic.media;
+
+
+<script type="text/javascript">
+    $(document).ready(function () {                      
+        var widthcount = 0;
+        $("#horiz_container li").each(function () {
+            widthcount = widthcount + 119;
+        })
+        widthcount = widthcount - 5;
+        $("#horiz_container").css({ "width": widthcount + "px" });
+
+        if ($.browser.mozilla || $.browser.msie) {
+            $('h1').css('background', '#ffffff');
+            $('h1').css('color', '#d5d5d5');
+            $('#createdby').css('background', '#ffffff');
+            $('#createdby').css('color', '#d5d5d5');
+        }
+        $('#horiz_container_outer').horizontalScroll();
+    });
+</script>
+
+@*library here*@
+
+<script type="text/javascript">
+    $(function () {
+        $('#slides').slides({
+            preload: true,
+            //preloadImage: '',
+            play: 4500,
+            pause: 4500,
+            hoverPause: true,
+            animationStart: function (current) {
+                $('.caption').animate({
+                    bottom: -35
+                }, 100);
+
+                if (window.console && console.log) {
+                    // example return of current slide number
+                    console.log('animationStart on slide: ', current);
+                };
+                var id = parseInt($('.pagination li[class="current"] a').html() - 1);
+                $('.description p').html($('#description-' + id).html());
+                $('.smallimages').addClass("gray");
+                $('#small-' + id).removeClass("gray");
+            },
+            animationComplete: function (current) {
+                $('.caption').animate({
+                    bottom: 0
+                }, 200);
+
+                if (window.console && console.log) {
+                    // example return of current slide number
+                    console.log('animationComplete on slide: ', current);
+                };
+                var id = parseInt($('.pagination li[class="current"] a').html() - 1);
+                $('.description p').html($('#description-' + id).html());
+                $('.smallimages').addClass("gray");
+                $('#small-' + id).removeClass("gray");
+            },
+            slidesLoaded: function () {
+                $('.caption').animate({
+                    bottom: 0
+                }, 200);
+                var id = parseInt($('.pagination li[class="current"] a').html() - 1);
+                $('.description p').html($('#description-' + id).html());
+                $('.smallimages').addClass("gray");
+                $('#small-' + id).removeClass("gray");
+            }
+
+        });
+        
+    });
+
+    function selectslide(property) {
+        var id = property.id.replace("small-","");
+        $('.pagination li a[href="#' + id + '"]').click();
+        $('.smallimages').addClass("gray");
+       
+
+    }
+
+</script>
+
+<div class="description" ><p></p></div>
+  <div class="head-right">
+             <ul class="top-list">
+
+ <script src="/scripts/slides.min.jquery.js"></script>
+@{
+ 
+    int id_01 = Convert.ToInt32(Request["projectpage"]);
+    if (id_01 <= 0)
+    {
+        Media firstnode = new Media(1160);
+        id_01 = firstnode.Children[0].Id;
+    }
+    Media project = new Media(id_01);
+
+    Media projectparent = new Media(1160);
+
+    string next = "";
+    string nextlink = "";
+    string previous = "";
+    string previouslink = "";
+    int getnext = 0;
+    int count = 0;
+
+
+    foreach (var projectchild in projectparent.Children)
+    {
+        if (getnext == 1)
+        {
+            next = projectchild.Text.ToString();
+            nextlink = projectchild.Id.ToString();
+            getnext = 0;
+        }
+        if (projectchild.Text == project.Text)
+        {
+
+            try
+            {
+                previous = projectparent.Children[count - 1].Text.ToString();
+                previouslink = projectparent.Children[count - 1].Id.ToString();
+            }
+            catch (Exception)
+            {
+                previous = projectparent.Children.Last().Text.ToString();
+                previouslink = projectparent.Children.Last().Id.ToString();
+            }
+
+            getnext = 1;
+        }
+        count++;
+    }
+
+    string projectnextlink = "";
+    string projectpreviouslink = "";
+
+    string projectnextname = "";
+    string projectpreviousname = "";
+
+    Node projs = new Node(1085);
+    foreach (Node proj in projs.Children)
+    {
+        if (proj.GetProperty("slidePage").Value == nextlink)
+        {
+            projectnextname = proj.Name;
+        }
+        if (proj.GetProperty("slidePage").Value == previouslink)
+        {
+            projectpreviousname = proj.Name;
+        }
+    }
+
+    if ((nextlink == "") || (projectnextname == ""))
+    {
+        var firstname = projectparent.Children.First().Text;
+        var firstlink = projectparent.Children.First().Id;
+        next = firstname;
+        projectnextlink = "/projects/" + projs.Children[0].Name + "/?projectpage=" + firstlink;
+    }
+    else
+    {
+        projectnextlink = "/projects/" + projectnextname + "/?projectpage=" + nextlink;
+    }
+
+    if (previous == "")
+    {
+        var pfirstname = projectparent.Children.Last().Text;
+        var pfirstlink = projectparent.Children.Last().Id;
+        previous = pfirstname;
+        projectpreviouslink = "/projects/" + projectpreviousname + "/?projectpage=" + pfirstlink;
+    }
+    else
+    {
+        projectpreviouslink = "/projects/" + projectpreviousname + "/?projectpage=" + previouslink;
+    }
+    
+   
+    <li>
+ 
+            <a  class="nextHover" href="@projectnextlink">Next Project&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@next</a><br />
+            <a class="prevHover" href="@projectpreviouslink">Previous Project&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@previous</a>
+
+   </li>
+      
+  
+}
+
+
+
+
+@*Next Previous end button*@
+            </ul>
+           </div>
+<div id="slides">
+    <div class="slides_container">
+       @{
+           int id = Convert.ToInt32(Request["projectpage"]);
+           if (id <= 0)
+           {
+               Media firstnode = new Media(1160);
+               id = firstnode.Children[0].Id;
+           }
+
+           Media banners = new Media(id);
+           int idbig = 0;
+           foreach (var banner in banners.Children)
+           {
+               <div class="slide">
+              @* <a href="" title="">*@
+                    <img src="@banner.getProperty("umbracoFile").Value" width="703" height="473" alt="Slide 6" />@*</a>*@
+                <div id="description-@idbig" class="description-text">@Html.Raw(banner.getProperty("projectContent").Value.ToString())</div>
+               </div>
+               idbig++;
+           }
+        }
+    </div>
+<div id="nav_container">
+   <span class="rollover"> <a href="#" class="prev">
+        <img src="/images/HomeSlide/img/arrow-prev.png" width="44" height="43" alt="Arrow Prev"></a></span>
+  <span class="rollover">   <a href="#" class="next">
+        <img src="/images/HomeSlide/img/arrow-next.png" width="44" height="43" alt="Arrow Next"></a></span>
+</div>
+</div>
+<div style="position: absolute;" id="leftContainer" >
+    <div style="position: relative; left: 257px; top: 15px;" id="inner_container">
+        <div id="horiz_container_outer">
+            <div style="position: absolute; left: -180px; top: 0px; visibility: visible;" id="horiz_container_inner">
+                <div id="horiz_container">
+                       @{
+                           int id2 = Convert.ToInt32(Request["projectpage"]);
+
+                           if (id2 <= 0)
+                           {
+                               Media firstnode = new Media(1160);
+                               id2 = firstnode.Children[0].Id;
+                           }
+                           Media bannerssmall = new Media(id2);
+                           if (bannerssmall.Children.Count() < 2)
+                           {
+                                        <script type="text/javascript">
+                                            $(document).ready(function () {
+                                                $("#inner_container").css("top", "480px");
+                                                $(".description").css("top", "196px");
+                                                $(".gray").css("opacity", "50");
+                                                $('#project-home-slide').append("<ul class='pagination' style='top: 45px;'><li class='current'><a href='#0'>1</a></li></ul>");
+                                            });
+                                        </script>
+                              
+                           }
+
+                           int idsmall = 0;
+                           foreach (var bannersmall in bannerssmall.Children)
+                           {
+                                           <li>
+                                             <img id="small-@idsmall" height="90px" width="114px" class="gray smallimages" src="@bannersmall.getProperty("umbracoFile").Value" alt="" onclick="selectslide(this)">
+                                           </li>
+                               idsmall++;
+                           }
+                                         
+                        }
+                    
+                </div>
+            </div>
+        </div>
+        <div id="scrollbar">
+            <a id="left_scroll" class="mouseover_left" href="#"></a>
+            <div id="track">
+             </div>
+                <div style=" height: 5px; margin-top: 3px; left: 37px;  width: 170px;" id="dragBar">
+               
+            </div>
+            <a id="right_scroll" class="mouseover_right" href="#"></a>
+        </div>
+    </div>
+</div>
+

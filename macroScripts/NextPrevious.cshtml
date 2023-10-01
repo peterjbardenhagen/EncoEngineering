@@ -1,0 +1,99 @@
+﻿@using umbraco.presentation.nodeFactory
+@using umbraco.MacroEngines
+@using umbraco.cms.businesslogic.media;
+
+@{
+ 
+    int id_01 = Convert.ToInt32(Request["projectpage"]);
+    if (id_01 <= 0)
+    {
+        Media firstnode = new Media(1160);
+        id_01 = firstnode.Children[0].Id;
+    }
+    Media project = new Media(id_01);
+   
+    Media projectparent = new Media(1160);
+
+    string next = "";
+    string nextlink = "";
+    string previous = "";
+    string previouslink = "";
+    
+    int getnext = 0;
+    int count = 0;
+    foreach (var projectchild in projectparent.Children)
+    {
+        if (getnext == 1)
+        {
+            count = count - 2;
+            next = projectchild.Text.ToString();
+            nextlink = projectchild.Id.ToString();
+
+            try
+            {
+                previous = projectparent.Children[count].Text.ToString();
+                previouslink = projectparent.Children[count].Id.ToString();
+            }
+            catch (Exception)
+            {
+                previous = projectparent.Children.Last().Text.ToString();
+                previouslink = projectparent.Children.Last().Id.ToString();
+            }
+           
+            
+            getnext = 0;
+        }
+        if (projectchild.Text == project.Text)
+        {
+            getnext = 1;
+        }
+        count++;
+    }
+    
+    string projectnextlink = "";
+    string projectpreviouslink = "";
+    Node projectnodes = new Node(1085);
+    var projectname = "";
+    
+    foreach(Node projectnode in projectnodes.Children)
+    {
+        if (id_01 == Convert.ToInt32(projectnode.GetProperty("slidePage").Value))
+      {
+            projectname = projectnode.Name;
+            projectname = projectname.Replace(" ", "-");
+      }
+    }
+    
+    if (nextlink == "")
+    {
+        var firstname = projectparent.Children.First().Text;
+        var firstlink = projectparent.Children.First().Id;
+        next = firstname;
+        projectnextlink = "/projects/" + @projectname + "/?projectpage=" + firstlink;
+    }
+    else
+    {
+        projectnextlink = "/projects/" + @projectname + "/?projectpage=" + nextlink;
+    }
+
+    if (previous == "")
+    {
+        var pfirstname = projectparent.Children.Last().Text;
+        var pfirstlink = projectparent.Children.Last().Id;
+        previous = pfirstname;
+        projectpreviouslink = "/projects/" + @projectname + "/?projectpage=" + pfirstlink;
+    }
+    else
+    {
+        projectpreviouslink = "/projects/" + @projectname + "/?projectpage=" + previouslink;
+    }
+    
+   
+    <li>
+            <a href="@projectnextlink">Next Project <img src="/images/NextArrow.png" alt="nextarrow"/> @next</a><br />
+            <a href="@projectpreviouslink">Previous Project <img src="/images/prevarrow.png" alt="nextarrow"/> @previous</a>
+            
+    </li>
+    
+  
+}

@@ -1,0 +1,10 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/MasterTemplate.master" AutoEventWireup="true" %>
+  
+<asp:content ContentPlaceHolderId="ContentArea" runat="server">
+ 
+  <div id="image-one">
+    <ul class="img_list">
+      <umbraco:Macro Alias="Project_Image_Gallery" runat="server" />
+    </ul>
+  </div>
+</asp:content>

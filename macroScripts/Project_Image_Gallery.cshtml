@@ -1,0 +1,60 @@
+﻿
+@using umbraco.presentation.nodeFactory
+@using umbraco.MacroEngines
+@using umbraco.cms.businesslogic.media;
+@{
+<script type="text/javascript">  
+
+$(document).ready(function(){
+                    
+    $(".rollover").css({'opacity':'0'});
+
+    $('.img_list a').hover(
+          function() {
+                       var id = $(this).attr("id").replace("pop_id-","");
+                   
+                      $(this).find('.rollover').stop().fadeTo(500, 1);
+                      var value = $(this).parent().next().val();
+            
+
+                  
+        },
+        function() {
+  
+            $(this).find('.rollover').stop().fadeTo(500, 0);
+        }
+    )
+                             
+ 
+
+});    
+
+
+                                
+</script>
+    Media imgGallery = new Media(1160);
+int counter = 0;
+foreach(Media galleries in imgGallery.Children)
+{
+            var ProjectNodeId = Convert.ToInt32(galleries.getProperty("linktoDocument").Value);
+            Node banner = new Node(ProjectNodeId);
+            var slidemediaId = banner.GetProperty("slidePage").Value.ToString();
+           
+            
+            string popup_id = "popup_id"+@galleries.Id;                                             
+            int linkurl = int.Parse(galleries.getProperty("linktoDocument").Value.ToString());
+
+            string projecturllink = Convert.ToString(umbraco.library.NiceUrl(linkurl)) + "?projectpage=" + slidemediaId;
+            <li class="image_one">
+            <a style="text-decoration: none;" href="@projecturllink" id="pop_id-@counter" class="hovera" onclick="$(this).find('.rollover').stop().fadeTo(500, 0);">
+            <span class="rollover"><p style="color: #ffffff; margin-left: 27px; margin-top: 30px; position: absolute;"><b>@galleries.getProperty("projectName").Value</b></p>
+             <p style="color: #fff; margin-left: 27px; margin-top: 45px;"><b>@galleries.getProperty("projectYear").Value</b></p>
+             <p style="color: #fff; height: 53px; width: 187px; margin-left: 27px;">@galleries.getProperty("projectContent").Value</p></span>
+             <img alt="featureImage" src="@galleries.getProperty("featureImage").Value" height="160" width="220" />
+             
+            </a>
+            </li>
+            counter++;                                      
+ }
+ 
+}

@@ -1,0 +1,9 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/MasterTemplate.master" AutoEventWireup="true" %>
+
+<asp:content ContentPlaceHolderId="ContentArea" runat="server">
+
+<div id="project-home-slide">
+       <umbraco:Macro Alias="HomeBanner" runat="server"></umbraco:Macro>
+      <script src="/scripts/scrolljquery.js" type="text/javascript"></script>
+  </div>
+</asp:content>
